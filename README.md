@@ -6,6 +6,12 @@ This repository does not contain the SDK source code. It provides examples,
 build scripts, and release download instructions for the prebuilt C++ SDK and
 Python wheel.
 
+## Documentation
+
+- [Documentation site](https://smore-robotics.github.io/smrore_sdk/)
+- [中文文档](https://smore-robotics.github.io/smrore_sdk/zh/)
+- [C++ API reference](https://smore-robotics.github.io/smrore_sdk/api/cpp/)
+
 ## Quick Start
 
 ```bash

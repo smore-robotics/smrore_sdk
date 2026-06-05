@@ -1,0 +1,76 @@
+site_name: smrcore_sdk
+site_description: Smartmore Robot SDK documentation
+site_url: https://smore-robotics.github.io/smrore_sdk/
+repo_url: https://github.com/smore-robotics/smrore_sdk
+repo_name: smore-robotics/smrore_sdk
+
+plugins:
+  - search
+  - i18n:
+      reconfigure_material: true
+      docs_structure: suffix
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: zh
+          name: 中文
+          build: true
+          site_name: smrcore_sdk 文档
+          site_description: Smartmore Robot SDK 文档
+          nav_translations:
+            Home: 首页
+            Install: 安装
+            Usage: 使用
+            Examples: 示例
+            Support: 支持
+            API Reference: API 参考
+
+theme:
+  name: material
+  language: en
+  logo: assets/logo.png
+  favicon: assets/logo.png
+  palette:
+    - scheme: default
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    - scheme: slate
+      primary: blue grey
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.tabs.link
+  icon:
+    repo: fontawesome/brands/github
+
+nav:
+  - Home: index.md
+  - Install: install.md
+  - Usage: usage.md
+  - Examples: examples.md
+  - Support: support.md
+  - API Reference: api/index.md
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences

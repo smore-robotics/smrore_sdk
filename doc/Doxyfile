@@ -1,0 +1,33 @@
+PROJECT_NAME           = "smrcore_sdk C++ API"
+PROJECT_BRIEF          = "Smartmore Robot SDK C++ API Reference"
+OUTPUT_DIRECTORY       = docs/api/cpp
+HTML_OUTPUT            = .
+
+INPUT                  = 3rdparty/smrcore_sdk/include/rcore/sdk
+FILE_PATTERNS          = *.hpp
+RECURSIVE              = YES
+
+GENERATE_HTML          = YES
+GENERATE_LATEX         = NO
+GENERATE_TREEVIEW      = YES
+SEARCHENGINE           = YES
+
+EXTRACT_ALL            = YES
+EXTRACT_PRIVATE        = NO
+EXTRACT_STATIC         = NO
+HIDE_UNDOC_MEMBERS     = NO
+HIDE_UNDOC_CLASSES     = NO
+
+FULL_PATH_NAMES        = NO
+STRIP_FROM_INC_PATH    = 3rdparty/smrcore_sdk/include/rcore
+
+QUIET                  = YES
+WARNINGS               = YES
+WARN_IF_UNDOCUMENTED   = NO
+WARN_AS_ERROR          = NO
+
+JAVADOC_AUTOBRIEF      = YES
+MARKDOWN_SUPPORT       = YES
+OPTIMIZE_OUTPUT_FOR_C  = NO
+
+HTML_TIMESTAMP         = NO
