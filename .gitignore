@@ -1,0 +1,17 @@
+# Build outputs
+build/
+out/
+cmake-build-*/
+
+# Downloaded/extracted artifacts
+*.tar.gz
+*.zip
+*.whl
+sdk/
+3rdparty/
+extracted/
+
+# Editor/system files
+.vscode/
+.idea/
+.DS_Store
