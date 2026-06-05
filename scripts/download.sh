@@ -1,13 +1,28 @@
 #!/usr/bin/env bash
 set -e
 
-VERSION="0.0.1"
 GITHUB_REPO="smore-robotics/smrore_sdk"
+VERSION="${VERSION:-latest}"
 INSTALL_DIR="3rdparty/smrcore_sdk"
 
 ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd -P)"
-ASSET="smrcore_sdk-cpp-linux-x86_64-v${VERSION}.tar.gz"
-URL="https://github.com/${GITHUB_REPO}/releases/download/v${VERSION}/${ASSET}"
+
+if [ "$VERSION" = "latest" ]; then
+    LATEST_URL="$(curl -Ls -o /dev/null -w '%{url_effective}' "https://github.com/${GITHUB_REPO}/releases/latest")"
+    VERSION="${LATEST_URL##*/}"
+    VERSION="${VERSION#v}"
+else
+    VERSION="${VERSION#v}"
+fi
+
+if ! printf '%s\n' "$VERSION" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+$'; then
+    echo "download: VERSION must be latest or x.y.z" >&2
+    exit 1
+fi
+
+URL="https://github.com/${GITHUB_REPO}/releases/download/v${VERSION}/smrcore_sdk-cpp-linux-x86_64-v${VERSION}.tar.gz"
+
+ASSET="${URL##*/}"
 
 cd "$ROOT_DIR"
 

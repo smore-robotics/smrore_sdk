@@ -12,7 +12,7 @@ Python wheel.
 git clone https://github.com/smore-robotics/smrore_sdk.git
 cd smrore_sdk
 
-# Download and extract the C++ SDK into ./3rdparty/smrcore_sdk
+# Download and extract the latest C++ SDK into ./3rdparty/smrcore_sdk
 ./scripts/download.sh
 
 # Build C++ examples
@@ -46,16 +46,20 @@ Releases are published on GitHub:
 https://github.com/smore-robotics/smrore_sdk/releases
 ```
 
-Version `0.0.1` assets:
+Release assets:
 
 ```text
-smrcore_sdk-cpp-linux-x86_64-v0.0.1.tar.gz
-smrcore_sdk-cpp-windows-x86_64-v0.0.1.tar.gz
-rcore_sdk_py-0.0.1-<python-tags>.whl
+smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
+smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
+rcore_sdk_py-<version>-<python-tags>.whl
 ```
 
-`scripts/download.sh` downloads the Linux C++ SDK directly from the public
-GitHub Release URL.
+`scripts/download.sh` downloads the Linux C++ SDK from the latest public
+GitHub Release by default. To use a fixed release:
+
+```bash
+VERSION=0.0.1 ./scripts/download.sh
+```
 
 ## C++ Integration
 
