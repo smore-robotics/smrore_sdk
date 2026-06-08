@@ -1,16 +1,35 @@
+<div align="center">
+
+<img src="docs/assets/logo.png" alt="Smartmore Robotics" width="96" />
+
 # smrcore_sdk
 
-Smartmore Robot SDK public integration repository.
+**Build, integrate, and deploy robot applications on the Smartmore Robot SDK.**
 
-This repository does not contain the SDK source code. It provides examples,
-build scripts, and release download instructions for the prebuilt C++ SDK and
-Python wheel.
+[![License](https://img.shields.io/badge/License-Apache%202.0-1f6feb.svg)](LICENSE)
+[![Docs](https://img.shields.io/badge/Docs-online-2ea043.svg)](https://smore-robotics.github.io/smrore_sdk/)
+[![CI](https://github.com/smore-robotics/smrore_sdk/actions/workflows/ci.yml/badge.svg)](https://github.com/smore-robotics/smrore_sdk/actions/workflows/ci.yml)
+[![Release](https://img.shields.io/github/v/release/smore-robotics/smrore_sdk?label=Release&color=1f6feb)](https://github.com/smore-robotics/smrore_sdk/releases)
+
+**English** · [简体中文](README.zh.md)
+
+</div>
+
+---
+
+The public integration repository for the **Smartmore Robot SDK**. It ships
+build scripts, runnable C++ and Python examples, and release download helpers
+for the prebuilt C++ SDK and Python wheel. It does **not** contain SDK source
+code.
 
 ## Documentation
 
-- [Documentation site](https://smore-robotics.github.io/smrore_sdk/)
-- [中文文档](https://smore-robotics.github.io/smrore_sdk/zh/)
-- [C++ API reference](https://smore-robotics.github.io/smrore_sdk/api/cpp/)
+Installation, usage, the full example walkthrough, and the C++ API reference all
+live on the documentation site.
+
+- **[Documentation site](https://smore-robotics.github.io/smrore_sdk/)**
+- **[中文文档](https://smore-robotics.github.io/smrore_sdk/zh/)**
+- **[C++ API reference](https://smore-robotics.github.io/smrore_sdk/api/cpp/)**
 
 ## Quick Start
 
@@ -18,41 +37,19 @@ Python wheel.
 git clone https://github.com/smore-robotics/smrore_sdk.git
 cd smrore_sdk
 
-# Download and extract the latest C++ SDK into ./3rdparty/smrcore_sdk
-./scripts/download.sh
+./scripts/download.sh            # fetch the latest prebuilt C++ SDK
+./scripts/build.sh               # build the C++ examples
 
-# Build C++ examples
-./scripts/build.sh
-
-# Run basic examples. Omit robot_ip for local simulation.
-./build/01_connect [robot_ip]
-./build/02_read_state [robot_ip]
+./build/01_connect [robot_ip]    # omit robot_ip for local simulation
 ```
 
-`03_movej` and `04_movel` are motion examples. Before running them, open the
-source files and verify the target joint positions or Cartesian poses are safe
-for your robot, tool, payload, and workspace. Modify the targets if needed.
-Also confirm the robot or simulator is ready, emergency stop is reachable, and
-the workspace is clear.
-
-```bash
-# Review these files first:
-#   examples/03_movej.cpp
-#   examples/04_movel.cpp
-
-./build/03_movej [robot_ip]
-./build/04_movel [robot_ip]
-```
+Python setup and the remaining examples are covered on the
+[documentation site](https://smore-robotics.github.io/smrore_sdk/).
 
 ## Release Assets
 
-Releases are published on GitHub:
-
-```text
-https://github.com/smore-robotics/smrore_sdk/releases
-```
-
-Release assets:
+Prebuilt binaries are published on the
+**[Releases page](https://github.com/smore-robotics/smrore_sdk/releases)**:
 
 ```text
 smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
@@ -60,108 +57,21 @@ smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
 rcore_sdk_py-<version>-<python-tags>.whl
 ```
 
-`scripts/download.sh` downloads the Linux C++ SDK from the latest public
-GitHub Release by default. To use a fixed release:
-
-```bash
-VERSION=0.0.1 ./scripts/download.sh
-```
-
-## C++ Integration
-
-The C++ SDK archive extracts to `3rdparty/smrcore_sdk/` and provides a CMake package:
-
-```text
-3rdparty/smrcore_sdk/
-├── include/rcore/sdk/*.hpp
-└── lib/cmake/smrcore_sdk/
-```
-
-Use it in your own CMake project:
-
-```cmake
-cmake_minimum_required(VERSION 3.16)
-project(my_robot_app LANGUAGES CXX)
-
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-
-find_package(smrcore_sdk REQUIRED)
-
-add_executable(my_robot_app main.cpp)
-target_link_libraries(my_robot_app PRIVATE smrcore::sdk)
-```
-
-Build with:
-
-```bash
-cmake -S . -B build -DCMAKE_PREFIX_PATH=/path/to/smrcore_sdk/3rdparty/smrcore_sdk
-cmake --build build
-```
-
-Include headers as:
-
-```cpp
-#include "sdk/robot.hpp"
-```
-
-Linux runtime dependencies are handled by the SDK package. No extra environment
-variables are required in a normal setup.
-
-## Python Wheel
-
-Download the wheel from the same GitHub Release, then install it:
-
-```bash
-VERSION=0.0.1
-PY_TAG=cp310-cp310-linux_x86_64
-curl -L --fail \
-  "https://github.com/smore-robotics/smrore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl" \
-  -o rcore_sdk_py-${VERSION}-${PY_TAG}.whl
-pip install rcore_sdk_py-${VERSION}-${PY_TAG}.whl
-python -c "import rcore_sdk; from rcore_sdk import _native; print(_native.linked_sdk())"
-```
-
-The `linked_sdk()` output includes the C++ SDK runtime version. It should match
-the release version used by the controller/runtime.
-
-## Python Examples
-
-Python examples mirror the C++ examples and live in `examples_py/`:
-
-```bash
-python examples_py/01_connect.py [robot_ip]
-python examples_py/02_read_state.py [robot_ip]
-```
-
-`03_movej.py` and `04_movel.py` are motion examples. Review the fixed MoveJ
-target and the MoveL TCP offset before running:
-
-```bash
-python examples_py/03_movej.py [robot_ip]
-python examples_py/04_movel.py [robot_ip]
-```
-
-## Examples
-
-| Example | Description |
-|---------|-------------|
-| `01_connect` | Initialize / IsConnected / Shutdown |
-| `02_read_state` | Read robot state and motor status |
-| `03_movej` | Fixed conservative joint-space motion |
-| `04_movel` | Short Cartesian line motion from current TCP pose |
-
-## Compatibility
-
-- OS: Linux x86_64 and Windows x86_64.
-- C++: C++17, CMake 3.16 or newer.
-- Python: use the wheel matching your Python ABI and platform.
-- The SDK client and robot controller/runtime must use the same protocol
-  version. If the controller was rebuilt from a different commit, rebuild and
-  republish the SDK assets from the same source state.
-
 ## Safety
 
-Robots are hazardous machines. Before running any motion example, verify the
-target in the example source code is safe for your setup, the workspace is
-clear, and emergency stop is reachable.
+> Robots are hazardous machines. Before running any motion example, verify the
+> target in the example source is safe for your robot, tool, payload, and
+> workspace. Confirm the emergency stop is reachable and the workspace is clear.
+
+## License
+
+This repository (examples, scripts, and docs) is released under the
+[Apache License 2.0](LICENSE). Prebuilt SDK release artifacts bundle third-party
+components whose license and attribution notices ship inside each release
+archive.
+
+<div align="center">
+
+Copyright © Smartmore Corporation
+
+</div>
