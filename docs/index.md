@@ -10,7 +10,7 @@ C++ or Python.
 
 <div class="grid cards" markdown>
 
--   **Getting Started**
+-   :material-rocket-launch:{ .lg .middle } **Getting Started**
 
     ---
 
@@ -18,7 +18,7 @@ C++ or Python.
 
     [Start here →](getting-started.md)
 
--   **C++ Examples**
+-   :material-language-cpp:{ .lg .middle } **C++ Examples**
 
     ---
 
@@ -26,7 +26,7 @@ C++ or Python.
 
     [Browse C++ examples →](examples/index.md)
 
--   **Python Examples**
+-   :material-language-python:{ .lg .middle } **Python Examples**
 
     ---
 
@@ -34,7 +34,7 @@ C++ or Python.
 
     [Browse Python examples →](python/examples/index.md)
 
--   **API Reference**
+-   :material-file-document-outline:{ .lg .middle } **API Reference**
 
     ---
 
@@ -46,10 +46,10 @@ C++ or Python.
 
 ## What This Repository Provides
 
-- C++ SDK release archives and Python wheels for supported platforms.
-- C++ examples in `examples/` and Python examples in `examples_py/`.
-- Scripts for downloading the latest C++ SDK and building examples.
-- C++ API reference generated from the SDK headers.
+- [x] Versioned C++ SDK release archives and Python wheels
+- [x] Runnable C++ examples (`examples/`) and Python examples (`examples_py/`)
+- [x] Scripts to download the latest C++ SDK and build the examples
+- [x] C++ API reference generated from the SDK headers
 
 The repository does not contain SDK source code. Users download versioned SDK
 assets from GitHub Releases and build their applications against those assets.

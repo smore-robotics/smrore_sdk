@@ -4,7 +4,7 @@
 
 <div class="grid cards" markdown>
 
--   **C++ SDK**
+-   :material-language-cpp:{ .lg .middle } **C++ SDK**
 
     ---
 
@@ -12,7 +12,7 @@
 
     [前往 C++ SDK →](#c-sdk)
 
--   **Python SDK**
+-   :material-language-python:{ .lg .middle } **Python SDK**
 
     ---
 
@@ -30,14 +30,14 @@ SDK 制品发布在 GitHub Releases：
 https://github.com/smore-robotics/smrcore_sdk/releases
 ```
 
-每个版本包含 C++ SDK 压缩包和 Python wheel：
+每个版本包含 C++ SDK 压缩包、Python wheel 和文档 PDF：
 
-```text
-smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
-smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
-rcore_sdk_py-<version>-<python-tags>.whl
-smrcore_sdk-docs-zh-v<version>.pdf
-```
+| 制品 | 说明 |
+|---|---|
+| `smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz` | Linux x86_64 的 C++ SDK |
+| `smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz` | Windows x86_64 的 C++ SDK |
+| `rcore_sdk_py-<version>-<python-tags>.whl` | Python wheel（按 Python ABI / 平台） |
+| `smrcore_sdk-docs-zh-v<version>.pdf` | 中文文档（即本手册） |
 
 ## C++ SDK {#c-sdk}
 
@@ -215,12 +215,13 @@ python examples_py/basics/connect.py
 
 ## 安全说明
 
-机器人是危险设备。运行任何运动代码前：
+!!! warning "安全提示"
+    机器人是危险设备。运行任何运动代码前：
 
-- 确认机器人已可靠安装。
-- 确认工具和负载配置正确。
-- 确认急停可触达。
-- 确认工作空间已清空。
-- 检查所有目标关节位置和笛卡尔位姿。
-- 从保守速度和小距离开始。
-- 如有本机仿真环境，优先使用仿真验证。
+    - 确认机器人已可靠安装。
+    - 确认工具和负载配置正确。
+    - 确认急停可触达。
+    - 确认工作空间已清空。
+    - 检查所有目标关节位置和笛卡尔位姿。
+    - 从保守速度和小距离开始。
+    - 如有本机仿真环境，优先使用仿真验证。

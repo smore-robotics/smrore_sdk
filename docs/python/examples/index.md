@@ -85,7 +85,8 @@ See the full source walkthrough: [Compliance Examples](compliance.md)
 
 ## Safety
 
-Before running any motion or compliance example, review the target poses and
-parameters in the source file and confirm they are safe for your robot, tool,
-payload, and workspace. Compliance examples use torque control; start with the
-conservative parameters provided and keep the e-stop reachable.
+!!! warning "Safety"
+    Before running any motion or compliance example, review the target poses and
+    parameters in the source file and confirm they are safe for your robot, tool,
+    payload, and workspace. Compliance examples use torque control; start with the
+    conservative parameters provided and keep the e-stop reachable.

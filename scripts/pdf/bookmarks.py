@@ -9,6 +9,11 @@ MANIFEST is a TSV produced by docs_pdf.sh, one line per merged part:
 
 Page counts come from each part PDF (so the cumulative start page is exact),
 and bookmark titles come from each source HTML <title>.
+
+Structure:
+    cover / toc        -> top-level entries (no group)
+    divider-*.html     -> top-level group parent (its title names the section)
+    everything else    -> child of the most recent divider
 """
 
 import html
@@ -17,11 +22,6 @@ import sys
 from pathlib import Path
 
 from pypdf import PdfReader, PdfWriter
-
-GROUP_GUIDE = "用户指南"
-GROUP_CPP_EX = "C++ 示例"
-GROUP_PYTHON = "Python 示例"
-GROUP_API = "C++ API 参考"
 
 # Pages promoted to top-level outline entries (no group wrapper).
 TOP_LEVEL = ("cover.html", "toc.html")
@@ -34,17 +34,6 @@ def title_from_html(path: str) -> str:
     text = re.sub(r"^smrcore_sdk C\+\+ API:\s*", "", text)
     text = re.sub(r"\s*[-|]\s*smrcore_sdk.*$", "", text)
     return text or Path(path).stem
-
-
-def group_of(html_path: str) -> str:
-    path = html_path.replace("\\", "/")
-    if "/python/" in path:
-        return GROUP_PYTHON
-    if "/api/" in path:
-        return GROUP_API
-    if "/examples/" in path:
-        return GROUP_CPP_EX
-    return GROUP_GUIDE
 
 
 def main() -> int:
@@ -60,22 +49,19 @@ def main() -> int:
     writer = PdfWriter(clone_from=out_pdf)
 
     start = 0
-    current_group = None
     parent = None
     for part, src in entries:
         pages = len(PdfReader(part).pages)
         name = Path(src).name
         if name in TOP_LEVEL:
             writer.add_outline_item(title_from_html(src), start)
-            current_group = None
             parent = None
-            start += pages
-            continue
-        group = group_of(src)
-        if group != current_group:
-            parent = writer.add_outline_item(group, start)
-            current_group = group
-        writer.add_outline_item(title_from_html(src), start, parent=parent)
+        elif name.startswith("divider-"):
+            parent = writer.add_outline_item(title_from_html(src), start)
+        elif parent is not None:
+            writer.add_outline_item(title_from_html(src), start, parent=parent)
+        else:
+            writer.add_outline_item(title_from_html(src), start)
         start += pages
 
     with open(out_pdf, "wb") as fh:

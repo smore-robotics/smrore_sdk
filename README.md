@@ -65,12 +65,12 @@ More setup and examples are on the
 Release assets are published on the
 **[Releases page](https://github.com/smore-robotics/smrcore_sdk/releases)**:
 
-```text
-smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
-smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
-rcore_sdk_py-<version>-<python-tags>.whl
-smrcore_sdk-docs-zh-v<version>.pdf
-```
+| Asset | Description |
+|---|---|
+| `smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz` | C++ SDK for Linux x86_64 |
+| `smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz` | C++ SDK for Windows x86_64 |
+| `rcore_sdk_py-<version>-<python-tags>.whl` | Python wheel (per Python ABI / platform) |
+| `smrcore_sdk-docs-zh-v<version>.pdf` | Chinese documentation PDF |
 
 ## Safety
 

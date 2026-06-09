@@ -132,20 +132,53 @@ gen_asset() {
 gen_asset "$ASSET_DIR/cover.html" "$COVER_HTML"
 gen_asset "$ASSET_DIR/toc.html" "$TOC_HTML"
 
+# Section divider pages. Each one precedes a top-level group and becomes that
+# group's parent bookmark, so the PDF reads like a chaptered manual.
+gen_divider() {
+    # $1 number  $2 kicker  $3 title  $4 subtitle  $5 out
+    sed -e "s|{{LOGO}}|$LOGO_PATH|g" \
+        -e "s|{{VERSION}}|$SDK_VERSION|g" \
+        -e "s|{{DATE}}|$BUILD_DATE|g" \
+        -e "s|{{NUMBER}}|$1|g" \
+        -e "s|{{KICKER}}|$2|g" \
+        -e "s|{{TITLE}}|$3|g" \
+        -e "s|{{SUBTITLE}}|$4|g" \
+        "$ASSET_DIR/divider.html" >"$5"
+}
+DIV_GUIDE="$WORK_DIR/divider-1-guide.html"
+DIV_CPP="$WORK_DIR/divider-2-cpp.html"
+DIV_PY="$WORK_DIR/divider-3-python.html"
+DIV_API="$WORK_DIR/divider-4-api.html"
+gen_divider "01" "Guide" "用户指南" \
+    "安装、构建与运行：从下载 SDK 到运行第一个最小程序。" "$DIV_GUIDE"
+gen_divider "02" "C++ Examples" "C++ 示例指南" \
+    "按主题组织的可运行 C++ 示例：基础、运动、配置、柔顺控制。" "$DIV_CPP"
+gen_divider "03" "Python Examples" "Python 示例指南" \
+    "与 C++ 对齐的可运行 Python 示例，附 Python API 摘要。" "$DIV_PY"
+gen_divider "04" "API Reference" "C++ API 参考" \
+    "由 C++ SDK 头文件生成的类型与接口参考。" "$DIV_API"
+
 PAGES=()
 
 # Cover + table of contents.
 PAGES+=("$COVER_HTML")
 PAGES+=("$TOC_HTML")
 
-# Chinese guide pages.
+# 用户指南
+PAGES+=("$DIV_GUIDE")
 add_page "zh/index.html"
 add_page "zh/getting-started/index.html"
+
+# C++ 示例
+PAGES+=("$DIV_CPP")
 add_page "zh/examples/index.html"
 add_page "zh/examples/basics/index.html"
 add_page "zh/examples/motion/index.html"
 add_page "zh/examples/config/index.html"
 add_page "zh/examples/compliance/index.html"
+
+# Python 示例
+PAGES+=("$DIV_PY")
 add_page "zh/python/index.html"
 add_page "zh/python/examples/index.html"
 add_page "zh/python/examples/basics/index.html"
@@ -153,6 +186,9 @@ add_page "zh/python/examples/motion/index.html"
 add_page "zh/python/examples/config/index.html"
 add_page "zh/python/examples/compliance/index.html"
 add_page "zh/python/api/index.html"
+
+# C++ API 参考
+PAGES+=("$DIV_API")
 add_page "zh/api/index.html"
 
 # Doxygen API pages. Keep generated source/member-list/search pages out of the

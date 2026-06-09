@@ -5,7 +5,7 @@ C++ or Python program. Pick your path:
 
 <div class="grid cards" markdown>
 
--   **C++ SDK**
+-   :material-language-cpp:{ .lg .middle } **C++ SDK**
 
     ---
 
@@ -13,7 +13,7 @@ C++ or Python program. Pick your path:
 
     [Go to C++ SDK →](#c-sdk)
 
--   **Python SDK**
+-   :material-language-python:{ .lg .middle } **Python SDK**
 
     ---
 
@@ -31,14 +31,15 @@ SDK assets are published on GitHub Releases:
 https://github.com/smore-robotics/smrcore_sdk/releases
 ```
 
-Each release contains C++ SDK archives and Python wheels:
+Each release contains C++ SDK archives, a Python wheel, and the documentation
+PDF:
 
-```text
-smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
-smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
-rcore_sdk_py-<version>-<python-tags>.whl
-smrcore_sdk-docs-zh-v<version>.pdf
-```
+| Asset | Description |
+|---|---|
+| `smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz` | C++ SDK for Linux x86_64 |
+| `smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz` | C++ SDK for Windows x86_64 |
+| `rcore_sdk_py-<version>-<python-tags>.whl` | Python wheel (per Python ABI / platform) |
+| `smrcore_sdk-docs-zh-v<version>.pdf` | Chinese documentation (this manual) |
 
 ## C++ SDK {#c-sdk}
 
@@ -217,12 +218,13 @@ python examples_py/basics/connect.py
 
 ## Safety
 
-Robots are hazardous machines. Before running any motion code:
+!!! warning "Safety"
+    Robots are hazardous machines. Before running any motion code:
 
-- Confirm the robot is securely installed.
-- Confirm the tool and payload are configured correctly.
-- Confirm emergency stop is reachable.
-- Confirm the workspace is clear.
-- Review all target joint positions and Cartesian poses.
-- Start with conservative speed and distance.
-- Use local simulation first when available.
+    - Confirm the robot is securely installed.
+    - Confirm the tool and payload are configured correctly.
+    - Confirm emergency stop is reachable.
+    - Confirm the workspace is clear.
+    - Review all target joint positions and Cartesian poses.
+    - Start with conservative speed and distance.
+    - Use local simulation first when available.
