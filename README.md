@@ -49,8 +49,7 @@ cd smrcore_sdk
 ### Python
 
 ```bash
-# Set VERSION to the release you want (see the Releases page), e.g. 0.0.1.
-VERSION=0.0.1
+VERSION=0.0.1  # replace with the release version you want
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
 curl -L -O "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl"
 python3 -m pip install "./rcore_sdk_py-${VERSION}-${PY_TAG}.whl"
@@ -63,13 +62,14 @@ More setup and examples are on the
 
 ## Release Assets
 
-Prebuilt binaries are published on the
+Release assets are published on the
 **[Releases page](https://github.com/smore-robotics/smrcore_sdk/releases)**:
 
 ```text
 smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
 smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
 rcore_sdk_py-<version>-<python-tags>.whl
+smrcore_sdk-docs-zh-v<version>.pdf
 ```
 
 ## Safety

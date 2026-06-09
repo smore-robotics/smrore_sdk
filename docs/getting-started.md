@@ -17,6 +17,7 @@ Each release contains C++ SDK archives and Python wheels:
 smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
 smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
 rcore_sdk_py-<version>-<python-tags>.whl
+smrcore_sdk-docs-zh-v<version>.pdf
 ```
 
 ## C++ SDK
@@ -103,8 +104,7 @@ int main()
 Download the wheel matching your Python ABI and platform:
 
 ```bash
-# Set VERSION to the release you want (see the Releases page), for example 0.0.1.
-VERSION=0.0.1
+VERSION=0.0.1  # replace with the release version you want
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
 curl -L --fail \
   "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl" \

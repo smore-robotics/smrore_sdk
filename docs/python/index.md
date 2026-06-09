@@ -23,19 +23,17 @@ The Python binding has its own conventions, summarised on the
 
 ## Install
 
-Install from a published GitHub Release wheel:
+Install the wheel matching your Python ABI and platform directly from a GitHub
+Release:
 
 ```bash
-# Set to the release you want (see the Releases page), for example 0.0.1.
-VERSION=0.0.1
+VERSION=0.0.1  # replace with the release version you want
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
-curl -L -o rcore_sdk_py-${VERSION}-${PY_TAG}.whl \
-  https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl
-
-python3 -m pip install ./rcore_sdk_py-${VERSION}-${PY_TAG}.whl
+python3 -m pip install \
+  "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl"
 ```
 
-On Windows use the matching wheel tag, for example `cp310-cp310-win_amd64`.
+For the full C++/Python setup flow, see [Getting Started](../getting-started.md).
 
 ## Verify the Installation
 

@@ -7,7 +7,7 @@ cd "$ROOT_DIR"
 SITE_DIR="${SITE_DIR:-site}"
 PDF_DIR="${PDF_DIR:-$SITE_DIR/pdf}"
 WORK_DIR="$PDF_DIR/.parts"
-OUT_PDF="${OUT_PDF:-$PDF_DIR/smrcore_sdk_zh.pdf}"
+OUT_PDF="${OUT_PDF:-}"
 
 CHROME_BIN="${CHROME_BIN:-}"
 if [ -z "$CHROME_BIN" ]; then
@@ -90,6 +90,17 @@ VERSION_HPP="3rdparty/smrcore_sdk/include/rcore/sdk/version.hpp"
 SDK_VERSION="$(grep -oE 'RCORE_SDK_VERSION_STRING "[0-9.]+"' "$VERSION_HPP" 2>/dev/null \
     | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' || true)"
 [ -z "$SDK_VERSION" ] && SDK_VERSION="dev"
+
+# Default output name mirrors the release asset convention
+# (smrcore_sdk-cpp-...-v<version>): smrcore_sdk-docs-zh-v<version>.pdf.
+if [ -z "$OUT_PDF" ]; then
+    if [ "$SDK_VERSION" = "dev" ]; then
+        OUT_PDF="$PDF_DIR/smrcore_sdk-docs-zh.pdf"
+    else
+        OUT_PDF="$PDF_DIR/smrcore_sdk-docs-zh-v${SDK_VERSION}.pdf"
+    fi
+fi
+
 BUILD_DATE="$(date '+%Y.%m')"
 LOGO_PATH="$ROOT_DIR/docs/assets/logo.png"
 

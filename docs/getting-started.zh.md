@@ -16,6 +16,7 @@ https://github.com/smore-robotics/smrcore_sdk/releases
 smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz
 smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz
 rcore_sdk_py-<version>-<python-tags>.whl
+smrcore_sdk-docs-zh-v<version>.pdf
 ```
 
 ## C++ SDK
@@ -101,8 +102,7 @@ int main()
 下载与 Python ABI 和平台匹配的 wheel：
 
 ```bash
-# 将 VERSION 设为你需要的发布版本（见 Releases 页面），例如 0.0.1。
-VERSION=0.0.1
+VERSION=0.0.1  # 按需替换为目标发布版本
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
 curl -L --fail \
   "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl" \

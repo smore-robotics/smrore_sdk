@@ -20,19 +20,16 @@ Python 绑定有自己的约定，详见 [Python API 摘要](api.md)：
 
 ## 安装
 
-从已发布的 GitHub Release wheel 安装：
+直接从 GitHub Release 安装与 Python ABI 和平台匹配的 wheel：
 
 ```bash
-# 设为你需要的发布版本（见 Releases 页面），例如 0.0.1。
-VERSION=0.0.1
+VERSION=0.0.1  # 按需替换为目标发布版本
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
-curl -L -o rcore_sdk_py-${VERSION}-${PY_TAG}.whl \
-  https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl
-
-python3 -m pip install ./rcore_sdk_py-${VERSION}-${PY_TAG}.whl
+python3 -m pip install \
+  "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl"
 ```
 
-Windows 请使用对应的 wheel 标签，例如 `cp310-cp310-win_amd64`。
+完整的 C++/Python 安装流程见 [快速开始](../getting-started.md)。
 
 ## 验证安装
 
