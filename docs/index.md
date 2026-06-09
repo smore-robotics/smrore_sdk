@@ -11,7 +11,7 @@ assets from GitHub Releases and build their applications against those assets.
 
 - [Install](install.md)
 - [Usage](usage.md)
-- [Examples](examples.md)
+- [Examples](examples/index.md)
 - [Support](support.md)
 - [API Reference](api/index.md)
 

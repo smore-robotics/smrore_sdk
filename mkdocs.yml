@@ -67,11 +67,11 @@ nav:
   - Install: install.md
   - Usage: usage.md
   - Examples:
-      - Overview: examples.md
-      - Basics: examples_basics.md
-      - Motion: examples_motion.md
-      - Configuration: examples_config.md
-      - Compliance: examples_compliance.md
+      - Overview: examples/index.md
+      - Basics: examples/basics.md
+      - Motion: examples/motion.md
+      - Configuration: examples/config.md
+      - Compliance: examples/compliance.md
   - Support: support.md
   - API Reference: api/index.md
 
