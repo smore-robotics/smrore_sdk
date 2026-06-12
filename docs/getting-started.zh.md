@@ -30,13 +30,14 @@ SDK 制品发布在 GitHub Releases：
 https://github.com/smore-robotics/smrcore_sdk/releases
 ```
 
-每个版本包含 C++ SDK 压缩包、Python wheel 和文档 PDF：
+每个版本包含 C++ SDK 压缩包、Python wheel、本机模拟器和文档 PDF：
 
 | 制品 | 说明 |
 |---|---|
 | `smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz` | Linux x86_64 的 C++ SDK |
 | `smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz` | Windows x86_64 的 C++ SDK |
 | `rcore_sdk_py-<version>-<python-tags>.whl` | Python wheel（按 Python ABI / 平台） |
+| `smrcore-simulator-linux-x86_64-v<version>.tar.gz` | 本机模拟器（MuJoCo），见[没有真机？使用模拟器](#simulator) |
 | `smrcore_sdk-docs-zh-v<version>.pdf` | 中文文档（即本手册） |
 
 ## C++ SDK {#c-sdk}
@@ -152,6 +153,58 @@ if not robot.Initialize(""):
 print(f"connected={robot.IsConnected()}")
 robot.Shutdown()
 ```
+
+## 没有真机？使用模拟器 {#simulator}
+
+没有实体机械臂也可以完整体验 SDK：Release 资产中提供 Linux 模拟器包
+（基于 MuJoCo 物理仿真），对外暴露与真机完全一致的接口，SDK 代码无需任何
+修改。
+
+### 安装与启动（Linux x86_64）
+
+```bash
+VERSION=0.0.1  # 按需替换为目标发布版本（须与 SDK 版本一致）
+curl -L --fail \
+  "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/smrcore-simulator-linux-x86_64-v${VERSION}.tar.gz" \
+  -o smrcore-simulator.tar.gz
+tar -xzf smrcore-simulator.tar.gz
+cd smrcore-simulator
+./run_simulator.sh            # 带 3D 可视化窗口
+# ./run_simulator.sh --no-gui # 无图形环境（服务器/CI）
+```
+
+可选场景参数：`--scene flat_table`（工作台 + 障碍物）、
+`--scene obstacle_field`、`--scene wiping_disk`。
+
+唯一的系统依赖是 OpenGL 运行库（桌面发行版通常已自带）；最小化的服务器
+/容器环境需要安装：
+
+```bash
+sudo apt install libgl1
+```
+
+### 连接模拟器
+
+模拟器与 SDK 程序在同一台机器上运行时，`Initialize` **省略 IP** 即可连接：
+
+```python
+from rcore_sdk import Robot
+
+robot = Robot()
+robot.Initialize("")   # 空字符串 = 连接本机模拟器
+```
+
+C++ 示例同理：`./build/basics_connect`（不传 `robot_ip` 参数）。
+所有运动类示例（`movej` / `movel` / `movep` / `movec` / `move_path` /
+异步运动 / 运动学查询）以及配置类示例均可直接在模拟器上运行。
+
+### 与真机的差异
+
+- 模拟器**未启用力/力矩传感器**：`fd_cartesian_admittance`
+  （力主导导纳）示例无法运行，`EnsureFtSensor` 会返回错误码 5301。
+- 物理行为由 MuJoCo 仿真，摩擦、接触等与真实硬件存在差异；模拟器
+  验证的是**接口与逻辑**，不能替代真机调试。
+- 模拟器版本必须与 SDK 版本一致（同一 Release 页下载即可保证）。
 
 ## 后续阅读
 
