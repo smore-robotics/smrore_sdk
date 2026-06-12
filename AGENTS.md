@@ -37,7 +37,7 @@ mkdocs build --strict              # build docs (must pass with no warnings)
 - **Release asset names:** `smrcore_sdk-cpp-<os>-x86_64-v<version>.tar.gz`,
   `rcore_sdk_py-<version>-<python-tags>.whl`,
   `smrcore_sdk-docs-zh-v<version>.pdf`.
-- **Docs version snippets** use `VERSION=0.0.1  # replace as needed` — they are
+- **Docs version snippets** use `VERSION=0.0.3  # replace as needed` — they are
   illustrative and are *not* edited per release.
 - **Bilingual docs:** every `docs/foo.md` has a matching `docs/foo.zh.md`. Add
   new nav entries to both `nav` and `nav_translations` in `mkdocs.yml`.

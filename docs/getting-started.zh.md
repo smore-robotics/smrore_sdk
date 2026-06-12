@@ -53,7 +53,7 @@ Linux 用户可以直接使用脚本：
 默认会下载最新 C++ SDK Release，并解压到 `3rdparty/smrcore_sdk/`。如需固定版本：
 
 ```bash
-VERSION=0.0.1 ./scripts/download.sh
+VERSION=0.0.3 ./scripts/download.sh
 ```
 
 也可以手动下载对应平台的压缩包并解压到任意目录，构建时将该目录作为
@@ -123,7 +123,7 @@ int main()
 下载与 Python ABI 和平台匹配的 wheel：
 
 ```bash
-VERSION=0.0.1  # 按需替换为目标发布版本
+VERSION=0.0.3  # 替换为你所使用的 SDK 版本
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
 curl -L --fail \
   "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl" \

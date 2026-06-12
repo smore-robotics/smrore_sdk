@@ -56,7 +56,7 @@ By default this downloads the latest C++ SDK release and extracts it to
 `3rdparty/smrcore_sdk/`. To pin a version:
 
 ```bash
-VERSION=0.0.1 ./scripts/download.sh
+VERSION=0.0.3 ./scripts/download.sh
 ```
 
 For manual installation, download the asset for your platform and extract it to
@@ -126,7 +126,7 @@ int main()
 Download the wheel matching your Python ABI and platform:
 
 ```bash
-VERSION=0.0.1  # replace with the release version you want
+VERSION=0.0.3  # replace with the release version you use
 PY_TAG=cp310-cp310-linux_x86_64   # Windows: cp310-cp310-win_amd64
 curl -L --fail \
   "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/rcore_sdk_py-${VERSION}-${PY_TAG}.whl" \
