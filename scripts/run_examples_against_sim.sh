@@ -44,12 +44,18 @@ EXAMPLES=(
     "cpp motion_movej"
     "cpp motion_movel"
     "cpp motion_movep"
+    "cpp motion_movec"
+    "cpp motion_move_path"
+    "cpp motion_async_motion"
     "cpp motion_motion_api"
     "py examples_py/basics/connect.py"
     "py examples_py/basics/read_state.py"
     "py examples_py/motion/movej.py"
     "py examples_py/motion/movel.py"
     "py examples_py/motion/movep.py"
+    "py examples_py/motion/movec.py"
+    "py examples_py/motion/move_path.py"
+    "py examples_py/motion/async_motion.py"
     "py examples_py/motion/kinematics.py"
 )
 
