@@ -64,8 +64,8 @@ Expected official release assets:
 - `smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz`
 - Linux Python wheel, for example `rcore_sdk_py-<version>-cp310-cp310-linux_x86_64.whl`
 - Windows Python wheel, for example `rcore_sdk_py-<version>-cp310-cp310-win_amd64.whl`
-- `smrcore-simulator-linux-x86_64-v<version>.tar.gz` (MuJoCo-based local
-  simulator; lets users run examples without hardware)
+- `smrcore-simulator-linux-x86_64-v<version>.tar.gz` (local simulator;
+  lets users run examples without hardware)
 - `smrcore_sdk-docs-zh-v<version>.pdf`
 
 The simulator tarball embeds a `VERSION` file that must equal the release

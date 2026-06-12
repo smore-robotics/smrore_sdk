@@ -39,7 +39,7 @@ and the documentation PDF:
 | `smrcore_sdk-cpp-linux-x86_64-v<version>.tar.gz` | C++ SDK for Linux x86_64 |
 | `smrcore_sdk-cpp-windows-x86_64-v<version>.tar.gz` | C++ SDK for Windows x86_64 |
 | `rcore_sdk_py-<version>-<python-tags>.whl` | Python wheel (per Python ABI / platform) |
-| `smrcore-simulator-linux-x86_64-v<version>.tar.gz` | Local simulator (MuJoCo) — see [No Robot? Use the Simulator](#simulator) |
+| `smrcore-simulator-linux-x86_64-v<version>.tar.gz` | Local simulator — see [No Robot? Use the Simulator](#simulator) |
 | `smrcore_sdk-docs-zh-v<version>.pdf` | Chinese documentation (this manual) |
 
 ## C++ SDK {#c-sdk}
@@ -160,13 +160,18 @@ robot.Shutdown()
 ## No Robot? Use the Simulator {#simulator}
 
 You can use the full SDK without physical hardware: release assets include a
-Linux simulator package (MuJoCo physics) that exposes exactly the same
-interface as a real robot. No SDK code changes are required.
+Linux simulator package that exposes exactly the same interface as a real
+robot. No SDK code changes are required.
 
 ### Install and Run (Linux x86_64)
 
+!!! warning "Version pairing"
+    The simulator version **must match the SDK version exactly**. Always
+    download both from the same release page. The simulator is available
+    starting from release 0.0.3.
+
 ```bash
-VERSION=0.0.1  # replace with the target release (must match the SDK version)
+VERSION=0.0.3  # replace with the SDK version you use
 curl -L --fail \
   "https://github.com/smore-robotics/smrcore_sdk/releases/download/v${VERSION}/smrcore-simulator-linux-x86_64-v${VERSION}.tar.gz" \
   -o smrcore-simulator.tar.gz
@@ -175,9 +180,6 @@ cd smrcore-simulator
 ./run_simulator.sh            # with 3D viewer
 # ./run_simulator.sh --no-gui # headless (servers / CI)
 ```
-
-Optional scenes: `--scene flat_table` (table + obstacles),
-`--scene obstacle_field`, `--scene wiping_disk`.
 
 The only system dependency is the OpenGL runtime (preinstalled on desktop
 distributions); minimal server/container environments need:
@@ -208,11 +210,9 @@ directly against the simulator.
 - The simulator has **no force/torque sensor enabled**: the
   `fd_cartesian_admittance` (force-led admittance) example cannot run;
   `EnsureFtSensor` returns error code 5301.
-- Physics is simulated by MuJoCo; friction and contact behavior differ from
-  real hardware. The simulator validates **interfaces and logic** — it is not
-  a substitute for real-robot tuning.
-- The simulator version must match the SDK version (download both from the
-  same release page).
+- Friction and contact behavior differ from real hardware. The simulator
+  validates **interfaces and logic** — it is not a substitute for real-robot
+  tuning.
 
 ## Next Steps
 

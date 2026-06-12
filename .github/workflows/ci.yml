@@ -88,11 +88,19 @@ jobs:
         run: |
           asset="smrcore-simulator-linux-x86_64-v${VERSION}.tar.gz"
           url="https://github.com/smore-robotics/smrcore_sdk/releases/download/${RELEASE_TAG}/${asset}"
-          if curl -L --fail --silent --show-error "$url" -o "$asset"; then
+          # Only a confirmed 404 means "asset not published yet" and may be
+          # skipped; transient download errors must fail the job to preserve
+          # simulator test coverage.
+          http_code="$(curl -L --silent --show-error -o "$asset" -w '%{http_code}' "$url")" || http_code=000
+          if [ "$http_code" = "200" ]; then
             tar -xzf "$asset"
             echo "SIM_DIR=$PWD/smrcore-simulator" >> "$GITHUB_ENV"
-          else
+          elif [ "$http_code" = "404" ]; then
+            rm -f "$asset"
             echo "::warning::simulator asset ${asset} not found in release ${RELEASE_TAG}; skipping simulator tests"
+          else
+            echo "simulator download failed (HTTP ${http_code}): ${url}" >&2
+            exit 1
           fi
 
       - name: Run examples against simulator
